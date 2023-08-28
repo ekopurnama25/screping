@@ -12,6 +12,9 @@ const getRequestHost = () =>
       .then((res) => res.text())
       .then((result) => {
         resolve(result);
+      })
+      .catch((error) => {
+        reject(error);
       });
   });
 (async () => {

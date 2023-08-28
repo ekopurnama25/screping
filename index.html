@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>EP Lite Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://one.posco.net/one/login/css/content.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://one.posco.net/one/login/css/default.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://one.posco.net/one/login/js/jquery-1.11.3.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://one.posco.net/one/login/js/easing.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://one.posco.net/one/login/js/ui.js"
+    ></script>
+    <script type="text/javascript">
+      function KeyDown(e) {
+        var eventobj = window.event ? event : e;
+        if (eventobj.keyCode == 116) {
+          eventobj.keyCode = null;
+          alert("Refresh (F5) key pressed.\nClick OK to perform the refresh");
+          autoReload();
+          return false;
+        }
+      }
+      document.onkeydown = KeyDown;
+
+      var focuschk = "1";
+
+      function loginSubmit() {
+        if (document.Login.username.value == "") {
+          alert("Please input the log in ID to use.");
+          document.Login.username.focus();
+          return;
+        }
+        if (document.Login.password.value == "") {
+          alert("Please input the password.");
+          document.Login.password.focus();
+          return;
+        }
+        var focuschk = "";
+        logintm();
+        Login.submit();
+      }
+
+      function logintm() {
+        sessionStorage.removeItem("logintm");
+        var today = new Date();
+        sessionStorage.setItem("logintm", today.getTime());
+      }
+
+      function fnInituserpwd() {
+        location.href =
+          "https://one.posco.net/idms/webapps/jsp/one/musercert/usercert.jsp";
+      }
+
+      function fnHideid() {
+        document.getElementById("userLabel").style.display = "none";
+        if (document.getElementById("password").value == "") {
+          document.getElementById("pwdLabel").style.display = "block";
+        } else {
+          document.getElementById("pwdLabel").style.display = "none";
+        }
+      }
+
+      function fnHidepwd() {
+        document.getElementById("pwdLabel").style.display = "none";
+        focuschk = "2";
+      }
+
+      function fnLineid() {
+        if (document.getElementById("username").value == "") {
+          document.getElementById("userLabel").style.display = "block";
+        } else {
+          document.getElementById("userLabel").style.display = "none";
+        }
+      }
+
+      function fnLinepwd() {
+        if (document.getElementById("password").value == "") {
+          document.getElementById("pwdLabel").style.display = "block";
+        } else {
+          document.getElementById("pwdLabel").style.display = "none";
+        }
+      }
+      function fnLinechk() {
+        if (document.getElementById("username").value == "") {
+          document.getElementById("userLabel").style.display = "block";
+        }
+        if (document.getElementById("username").value != "") {
+          document.getElementById("userLabel").style.display = "none";
+        }
+        if (focuschk == "1") {
+          if (document.getElementById("password").value == "") {
+            document.getElementById("pwdLabel").style.display = "block";
+          } else {
+            document.getElementById("pwdLabel").style.display = "none";
+          }
+        }
+        focuschk = "1";
+      }
+    </script>
+  </head>
+
+  <body
+    onload="javascript:fnLinechk();"
+    onkeydown="if(event.keyCode =='13') loginSubmit();"
+    class="login"
+  >
+    <div class="layout">
+      <!-- 2015-12-01 추가 -->
+      <div class="login_title">
+        <img
+          src="https://one.posco.net/one/login/css/images/login_title.png"
+          alt="Creating a Better Future With Global Open Communication and Collaboration! A huge applause and a big cheer to all of you as you create new success stories around the globe even at this moment for POSCO Group. Keep up the good work, and have a fulfilling day!"
+        />
+      </div>
+      <!-- //2015-12-01 추가 -->
+      <!-- 2015-12-01 login_area div 추가 -->
+      <div class="login_area" style="width: 866px; border: 1px solid #e7e7e7">
+        <!-- 2015-12-03 수정 -->
+        <img
+          src="https://one.posco.net/one/login/css/images/map_label.png"
+          alt="EP LITE"
+          class="map_label"
+        />
+        <div class="left-wrap world_map_area" style="border: 0">
+          <img
+            src="https://one.posco.net/one/login/css/images/world_map01.gif"
+            alt="world map"
+            class="world_map01"
+          />
+          <img
+            src="https://one.posco.net/one/login/css/images/world_map.gif"
+            alt="world map"
+            class="world_map_view"
+          />
+          <a href="javascript:map_roll(1500,3000,'easeInOutQuad');"
+            ><img
+              src="https://one.posco.net/one/login/css/images/btn_map_play.png"
+              alt="world map play"
+              class="btn_map_play"
+          /></a>
+        </div>
+        <div class="right-wrap logoin-right" style="height: 378px; border: 0">
+          <div class="login-inner">
+            <h2>
+              <img src="https://one.posco.net/one/login/css/images/login.gif" />
+            </h2>
+            <form
+              method="POST"
+              id="Login"
+              name="Login"
+              action="https://one.posco.net/idms/webapps/jsp/one/login/login_proc.jsp"
+              autocomplete="nope"
+            >
+              <input type="password" style="display: none" aria-hidden="true" />
+              <fieldset>
+                <legend>Login</legend>
+                <div class="input-wrap">
+                  <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    class="input-text"
+                    value=""
+                    placeholder="ID"
+                    autocomplete="off"
+                  />
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    style="ime-mode: disabled"
+                    autocomplete="new-password"
+                    class="input-text mgt7"
+                    onkeydown="if(event.keyCode =='13') loginSubmit();"
+                    placeholder="PASSWORD"
+                  />
+                </div>
+                <a
+                  href="javascript:loginSubmit();"
+                  style="
+                    padding-left: 0;
+                    padding-right: 0;
+                    width: 80px;
+                    text-align: center;
+                  "
+                  class="f_right btn-type05"
+                  ><span>LOGIN</span></a
+                >
+              </fieldset>
+              <div class="password-wrap">
+                <p>Please change your password frequently.</p>
+              </div>
+              <div class="password-wrap2">
+                <span class="icon"><span>Forgot your password?</span></span>
+              </div>
+              <a href="javascript:fnInituserpwd();" class="btn-password mgt15"
+                ><span>Password Reset</span></a
+              >
+            </form>
+            <div
+              class="password-wrap"
+              style="padding-top:5px; padding-bottom:0px; border-bottom:none; !important;"
+            >
+              <p>Global Help : 82-2-3457-5500</p>
+              <p>Email : globalhelp@posco.com</p>
+            </div>
+          </div>
+        </div>
+        <!-- //2015-12-01 login_area div 추가 -->
+      </div>
+      <!-- 2015-12-01 추가 -->
+      <div class="login_copyright">
+        <img
+          src="https://one.posco.net/one/login/css/images/login_copy.png"
+          alt="Copyright POSCO. All Rights Reserved."
+        />
+      </div>
+      <!-- //2015-12-01 추가 -->
+    </div>
+  </body>
+</html>
